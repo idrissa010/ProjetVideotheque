@@ -173,3 +173,10 @@
     at emit (node:internal/child_process:937:14)
     at process.processTicksAndRejections (node:internal/process/task_queues:83:21)
 2023-12-15 09:03:39.419 [info] New EH opened, aborting shutdown
+2023-12-15 09:10:42.371 [info] Getting Manifest... ms-azuretools.vscode-docker
+2023-12-15 09:10:42.571 [info] Installing extension: ms-azuretools.vscode-docker
+2023-12-15 09:10:44.093 [warning] Extension signature verification failed with error 'ENOENT': ms-azuretools.vscode-docker
+2023-12-15 09:10:44.459 [info] Extracted extension to file:///home/toto/.vscode-server/extensions/ms-azuretools.vscode-docker-1.28.0: ms-azuretools.vscode-docker
+2023-12-15 09:10:44.470 [info] Renamed to /home/toto/.vscode-server/extensions/ms-azuretools.vscode-docker-1.28.0
+2023-12-15 09:10:44.506 [info] Extracting extension completed. ms-azuretools.vscode-docker
+2023-12-15 09:10:44.518 [info] Extension installed successfully: ms-azuretools.vscode-docker
