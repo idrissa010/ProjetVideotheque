@@ -3,14 +3,14 @@ version: '3'
 services:
   serveur_container:
     build:
-      context: ./app1
+      context: ./videotheque
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
 
   serveur_api:
     build:
-      context: ./app2
+      context: ./videotheque-api
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
