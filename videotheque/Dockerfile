@@ -13,7 +13,7 @@ COPY requirements.txt /app/
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copiez le reste de l'application
-COPY . /app
+COPY app1/* /app/
 
 # Exposez le port sur lequel l'application Flask écoute
 EXPOSE 5000
