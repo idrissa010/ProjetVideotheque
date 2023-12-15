@@ -1,0 +1,21 @@
+# Fichiers générés par l'environnement virtuel
+venv/
+*.pyc
+*.pyo
+__pycache__/
+
+# Fichiers générés par Docker
+docker-compose.override.yml
+.docker/
+
+# Fichiers générés lors de la construction de l'image Docker
+Dockerfile.lock
+requirements.txt.lock
+
+# Répertoire de données Docker
+data/
+
+# Fichiers spécifiques à l'IDE ou à l'éditeur de texte
+.vscode/
+.idea/
+*.iml
