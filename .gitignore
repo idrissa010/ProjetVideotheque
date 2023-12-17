@@ -1,0 +1,84 @@
+# Fichiers générés par Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.pyc
+
+# Environnement virtuel Python
+venv/
+
+# Fichiers générés par Docker
+.docker/
+docker-compose.override.yml
+Dockerfile.override
+
+# Fichiers de logs
+*.log
+logs/
+
+# Fichiers d'environnement
+.env
+
+# Fichiers spécifiques à VSCode
+.vscode/
+
+# Fichiers spécifiques à PyCharm
+.idea/
+
+# Fichiers spécifiques à Jupyter
+.ipynb_checkpoints/
+
+# Fichiers spécifiques à l'éditeur de texte
+*.swp
+*.swo
+*.swn
+*.bak
+
+# Fichiers spécifiques à l'OS
+.DS_Store
+Thumbs.db
+
+# Fichiers de sortie (exemple : dossiers de build)
+dist/
+build/
+*.egg-info/
+
+# Fichiers spécifiques à Flask
+instance/
+
+# Fichiers spécifiques à l'application Flask
+*.pyc
+*.pyo
+__pycache__/
+*.pyc
+
+# Fichiers spécifiques aux tests
+htmlcov/
+.coverage
+
+# Fichiers spécifiques à la documentation
+doc/_build/
+
+# Fichiers spécifiques à la machine virtuelle
+.vagrant/
+.vagrantfile
+
+# Fichiers spécifiques aux fichiers de configuration
+config.py
+config_dev.py
+config_prod.py
+
+# Fichiers spécifiques aux bases de données
+db.sqlite3
+*.db
+*.sql
+
+# Fichiers spécifiques à la configuration de l'environnement
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
