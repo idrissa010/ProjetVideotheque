@@ -1,8 +1,11 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 import json
 import os
+app = Flask(__name__)
 
-app = Flask(__name__, template_folder='/home/toto/ProjetVideotheque/videotheque/templates')
+# Obtenez le chemin absolu du répertoire des modèles
+template_dir = os.path.abspath('templates')
+app.template_folder = template_dir
 
 # Get the directory of the script
 json_file_path = os.path.join('data', 'app1_data.json')
@@ -19,7 +22,7 @@ def index():
     except json.JSONDecodeError as e:
         return f"Error decoding JSON data: {json_file_path}\nError: {e}"
     except Exception as e:
-        return f"Error loading JSON data: {json_file_path}\nError: {e}"
+        return f"Unexpected error: {e}"
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
