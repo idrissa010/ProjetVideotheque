@@ -1,5 +1,6 @@
 # Utilisez une image de base Ubuntu 20.04
 FROM ubuntu:20.04
+FROM python:3.9
 
 # Installez Python et pip
 RUN apt-get update && \
