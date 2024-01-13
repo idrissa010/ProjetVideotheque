@@ -20,4 +20,4 @@ COPY . /app
 EXPOSE 8000
 
 # Commande par défaut pour lancer l'application Flask
-CMD ["python3", "app2/app.py"]
+CMD ["python3", "run.py"]
