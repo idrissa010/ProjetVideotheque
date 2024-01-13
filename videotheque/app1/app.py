@@ -33,5 +33,34 @@ def index():
 def signin():
     return render_template('signin.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+@app.route('/error_404')
+def error_404():
+    return render_template('error_404.html')
+
+@app.route('/catalog1')
+def catalog1():
+    return render_template('catalog1.html')
+
+@app.route('/catalog2')
+def catalog2():
+    return render_template('catalog2.html')
+
+@app.route('/details1')
+def details1():
+    return render_template('details1.html')
+
+@app.route('/details2')
+def details2():
+    return render_template('details2.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
