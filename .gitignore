@@ -67,7 +67,6 @@ doc/_build/
 .vagrantfile
 
 # Fichiers spécifiques aux fichiers de configuration
-config.py
 config_dev.py
 config_prod.py
 
