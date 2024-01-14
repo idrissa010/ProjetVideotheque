@@ -14,3 +14,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    volumes:
+      - ./videotheque-api/data:/app/data  # Montez le répertoire de données pour persistance
