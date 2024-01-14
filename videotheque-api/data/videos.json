@@ -1,0 +1,86 @@
+[
+  {
+    "title": "Nom de la vidéo",
+    "director": "Nom du réalisateur",
+    "main_actors": [
+      "Acteur 1",
+      "Acteur 2"
+    ],
+    "genre": "Genre de la vidéo",
+    "release_year": 2022,
+    "country": "Pays d'origine",
+    "duration": 120,
+    "language": "Langue de la vidéo",
+    "format": "DVD",
+    "is_public": true,
+    "note": 5,
+    "comments": "Commentaires sur la vidéo",
+    "owner_id": "ID du propriétaire",
+    "location": "Emplacement de la vidéo",
+    "synopsis": "Synopsis de la vidéo",
+    "summary": "Résumé de la vidéo"
+  },
+  {
+    "title": "Nom de la vidéo",
+    "director": "Nom du réalisateur",
+    "main_actors": [
+      "Acteur 1",
+      "Acteur 2"
+    ],
+    "genre": "Genre de la vidéo",
+    "release_year": 2022,
+    "country": "Pays d'origine",
+    "duration": 120,
+    "language": "Langue de la vidéo",
+    "format": "DVD",
+    "is_public": true,
+    "note": 5,
+    "comments": "Commentaires sur la vidéo",
+    "owner_id": "ID du propriétaire",
+    "location": "Emplacement de la vidéo",
+    "synopsis": "Synopsis de la vidéo",
+    "summary": "Résumé de la vidéo"
+  },
+  {
+    "title": "Bakries  Movies",
+    "director": "Bakri",
+    "main_actors": [
+      "Maroc1",
+      "Dish 2"
+    ],
+    "genre": "Genre de la vidéo",
+    "release_year": 2022,
+    "country": "Pays d'origine",
+    "duration": 120,
+    "language": "Langue de la vidéo",
+    "format": "DVD",
+    "is_public": true,
+    "note": 5,
+    "comments": "Commentaires sur la vidéo",
+    "owner_id": "ID du propriétaire",
+    "location": "Emplacement de la vidéo",
+    "synopsis": "Synopsis de la vidéo",
+    "summary": "Résumé de la vidéo"
+  },
+  {
+    "title": "Idrissa's   Movies",
+    "director": "Bakri",
+    "main_actors": [
+      "Maroc1",
+      "Dish 2"
+    ],
+    "genre": "Genre de la vidéo",
+    "release_year": 2022,
+    "country": "Pays d'origine",
+    "duration": 120,
+    "language": "Langue de la vidéo",
+    "format": "DVD",
+    "is_public": true,
+    "note": 5,
+    "comments": "Commentaires sur la vidéo",
+    "owner_id": "ID du propriétaire",
+    "location": "Emplacement de la vidéo",
+    "synopsis": "Synopsis de la vidéo",
+    "summary": "Résumé de la vidéo"
+  }
+]
