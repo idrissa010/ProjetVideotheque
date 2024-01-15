@@ -1,0 +1,45 @@
+
+{% include 'header_common.html' %}
+
+<body class="body">
+
+    <div class="sign section--bg" data-bg="{{ url_for('static', filename='images/section/section.jpg') }}">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="sign__content">
+						<!-- registration form -->
+                        <form action="{{ url_for('signup') }}" method="POST" class="sign__form">
+							<a href="{{ url_for('index') }}" class="sign__logo">
+								<img src="{{ url_for('static', filename='images/logo.svg') }}" alt="">
+							</a>
+
+							<div class="sign__group"> 
+								<input type="text" class="sign__input" name="username" placeholder="Username">
+							</div>
+
+							<div class="sign__group" hidden>
+								<input type="text" class="sign__input" placeholder="Email">
+							</div>
+
+							<div class="sign__group">
+								<input type="password" class="sign__input" name="password" placeholder="Password">
+							</div>
+
+							<div class="sign__group sign__group--checkbox" hidden>
+								<input id="remember" type="checkbox" checked="checked">
+								<label for="remember">I agree to the <a href="privacy.html">Privacy Policy</a></label>
+							</div>
+							
+							<button class="sign__btn" type="submit">Sign up</button>
+
+							<span class="sign__text">Already have an account? <a href="{{ url_for('signin') }}">Sign in!</a></span>
+						</form>
+						<!-- registration form -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% include 'footer_common.html' %}
