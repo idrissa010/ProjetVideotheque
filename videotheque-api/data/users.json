@@ -1,18 +1,1 @@
-[
-  {
-    "username": "utilisateur1",
-    "password": "$2b$12$NhS1XsWBYwKUtrrN5mZ/L.YtdUwQftES78SbBw0cYpeysItz.CwKm"
-  },
-  {
-    "username": "utilisateur2",
-    "password": "$2b$12$NhS1XsWBYwKUtrrN5mZ/L.YtdUwQftES78SbBw0cYpeysItz.CwKm"
-  },
-  {
-    "username": "idrissa",
-    "password": "scrypt:32768:8:1$SoIztV7Tqogcjt5a$fed7078f0398bc072a26f0e32ffec2382491e43ea604f3f013efb7425d0428b6d55ac8c297812c600fcf1c62086e7f0730f0b588a9c69b466037a8a17fcf79ba"
-  },
-  {
-    "username": "idrissa1",
-    "password": "scrypt:32768:8:1$SQcYEjgskekwzHZk$662b383e1588a565d714020abd4da201bd666541fc15e4223e9c87ac8b8e4d1383cda7f093899e5e8b699d2f93ff49e5bd48079dca9643d3609aa7810171a6c1"
-  }
-]
+[{"username": "utilisateur1", "password": "$2b$12$NhS1XsWBYwKUtrrN5mZ/L.YtdUwQftES78SbBw0cYpeysItz.CwKm"}, {"username": "utilisateur2", "password": "$2b$12$NhS1XsWBYwKUtrrN5mZ/L.YtdUwQftES78SbBw0cYpeysItz.CwKm"}, {"username": "idrissa", "password": "scrypt:32768:8:1$SoIztV7Tqogcjt5a$fed7078f0398bc072a26f0e32ffec2382491e43ea604f3f013efb7425d0428b6d55ac8c297812c600fcf1c62086e7f0730f0b588a9c69b466037a8a17fcf79ba"}, {"username": "idrissa1", "password": "scrypt:32768:8:1$SQcYEjgskekwzHZk$662b383e1588a565d714020abd4da201bd666541fc15e4223e9c87ac8b8e4d1383cda7f093899e5e8b699d2f93ff49e5bd48079dca9643d3609aa7810171a6c1"}, {"username": "bakri", "password": "scrypt:32768:8:1$fh7MhpLo37YpmPBj$8ba204d6d90e467fbb6410cc67cf8cea4e563c1cdb7ae665adcb26dc97c1eb991363f1b65be47a228c02370e1b81e45ffee3007c63ef499019090775249041e8"}, {"username": "test", "password": "scrypt:32768:8:1$UAmVpxDSvlDshgFC$d873e598ac7f753cba8b5028460d08aef957d623060f86207da55b3b31169713544bf2ccf133dd4a75b0f4e4d73c1abd33dfaf6c3166f5b0556fe23c8768552a"}, {"username": "med", "password": "scrypt:32768:8:1$zCM9a6YnRLunleOd$121e64723f6f70e5492714293a1a291dc14b910b442d26f4e8df4fba6cb39f3a38c9c5687d854a526431e4a55f5b6600c142196dda6aaf80fd678a1a59423ea8"}]

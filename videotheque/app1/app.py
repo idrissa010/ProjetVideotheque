@@ -1,6 +1,6 @@
-from flask import Flask, render_template
-import json
+from flask import Flask, render_template, redirect, request, url_for
 import os
+import requests
 app = Flask(__name__)
 
 # Obtenez le chemin absolu du répertoire des modèles
@@ -12,34 +12,94 @@ static_dir = os.path.abspath('static')
 app.static_folder = static_dir
 app.static_url_path = '/static'
 
-# Get the directory of the script
-json_file_path = os.path.join('data', 'app1_data.json')
+# Gestion globale des erreurs
+@app.errorhandler(Exception)
+def handle_error(e):
+    print(f"An error occurred: {e}")
+    return "Internal Server Error", 500  # Réponse d'erreur interne du serveur
+
 
 @app.route('/')
 def index():
-    try:
-        # Load data from the JSON file
-        with open(json_file_path, 'r') as json_file:
-            movie_data = json.load(json_file)
-        return render_template('index.html', movies=movie_data)
-    except FileNotFoundError as e:
-        return f"File not found: {json_file_path}\nError: {e}"
-    except json.JSONDecodeError as e:
-        return f"Error decoding JSON data: {json_file_path}\nError: {e}"
-    except Exception as e:
-        return f"Unexpected error: {e}"
+    return render_template('index.html')
 
-@app.route('/signin')
-def signin():
+# Route pour afficher le formulaire de connexion
+@app.route('/signin', methods=['GET'])
+def signin_form():
     return render_template('signin.html')
+
+# Page de connexion (signin)
+@app.route('/signin', methods=['POST'])
+def signin():
+    # Récupérer les données du formulaire
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    # Construire les données à envoyer à votre API
+    data = {
+        'username': username,
+        'password': password
+    }
+
+    # URL de votre API de login
+    api_url = 'http://10.11.5.97:8000/auth/login'
+
+    try:
+        # Envoyer la requête POST à l'API
+        response = requests.post(api_url, json=data)
+
+        # Traiter la réponse de l'API
+        if response.status_code == 200:
+            # Authentification réussie, rediriger vers la page souhaitée (index)
+            return redirect(url_for('index'))
+        else:
+            # Authentification échouée, afficher un message d'erreur
+            return render_template('signin.html', error_message='Invalid credentials')
+    except requests.RequestException as e:
+        print(f"Error making request to API: {e}")
+        return "Error making request to API", 500  # Réponse d'erreur interne du serveur
+
+
+# Route pour afficher le formulaire d'enregistrement
+@app.route('/signup', methods=['GET'])
+def signup_form():
+    return render_template('signup.html')
+
+# Page d'enregistrement (signup)
+@app.route('/signup', methods=['POST'])
+def signup():
+    # Récupérer les données du formulaire
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    # Construire les données à envoyer à votre API
+    data = {
+        'username': username,
+        'password': password
+    }
+
+    # URL de votre API de login
+    api_url = 'http://10.11.5.97:8000/auth/register'
+
+    try:
+        # Envoyer la requête POST à l'API
+        response = requests.post(api_url, json=data)
+
+        # Traiter la réponse de l'API
+        if response.status_code == 201:
+            # Authentification réussie, rediriger vers la page souhaitée (index)
+            return redirect(url_for('signin'))
+        else:
+            # Authentification échouée, afficher un message d'erreur
+            return render_template('signup.html', error_message='Invalid credentials')
+    except requests.RequestException as e:
+        print(f"Error making request to API: {e}")
+        return "Error making request to API", 500  # Réponse d'erreur interne du serveur
 
 @app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
 
 @app.route('/error_404')
 def error_404():
