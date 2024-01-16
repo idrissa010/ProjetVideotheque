@@ -42,7 +42,7 @@ def signin():
     }
 
     # URL de votre API de login
-    api_url = 'http://10.11.5.97:8000/auth/login'
+    api_url = 'http://10.11.5.81:8000/auth/login'
 
     try:
         # Envoyer la requête POST à l'API
@@ -79,7 +79,7 @@ def signup():
     }
 
     # URL de votre API de login
-    api_url = 'http://10.11.5.97:8000/auth/register'
+    api_url = 'http://10.11.5.81:8000/auth/register'
 
     try:
         # Envoyer la requête POST à l'API
