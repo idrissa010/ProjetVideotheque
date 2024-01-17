@@ -10,7 +10,17 @@ def load_users():
     except FileNotFoundError:
         users_data = []
     
-    return [User(**user_data) for user_data in users_data]
+    users = [User(
+        username=user_data['username'],
+        password=user_data['password'],
+        birth_date=user_data['birth_date'],
+        name=user_data['name'],
+        email=user_data['email'],
+        role=user_data['role']
+    ) for user_data in users_data]
+
+    print(users)  # Ajout de l'impression pour le débogage
+    return users
 
 def save_users(users):
     users_data = [user.to_dict() for user in users]
