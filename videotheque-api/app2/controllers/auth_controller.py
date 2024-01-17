@@ -4,6 +4,7 @@ from app2.services.auth_service import load_users, save_users
 from app2.models.user import User
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -15,12 +16,10 @@ def register():
         password = data.get('password')
         name = data.get('name')
         email = data.get('email')
-        birth_date_str = data.get('birth_date')  # Ajout de la birth_date
+        birth_date_str = data.get('birth_date')
 
-        # Convertir la chaîne de date en objet datetime
         birth_date = datetime.strptime(birth_date_str, '%Y-%m-%d') if birth_date_str else None
 
-        # Créer un utilisateur en utilisant le modèle User
         new_user = User(
             username=username,
             password=generate_password_hash(password),
@@ -28,24 +27,19 @@ def register():
             email=email,
             birth_date=birth_date
         )
-        # Charger les utilisateurs existants
+
         users = load_users()
 
-        # Vérifier si l'utilisateur existe déjà
         if any(user.username == new_user.username for user in users):
             return jsonify({'message': 'Username already exists'}), 400
 
-        # Ajouter le nouvel utilisateur
         users.append(new_user)
-
-        # Sauvegarder la liste mise à jour des utilisateurs
         save_users(users)
 
         return jsonify({'message': 'User registered successfully'}), 201
 
     except Exception as e:
         return jsonify({'message': f'Error during registration: {str(e)}'}), 500
-
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
@@ -57,6 +51,15 @@ def login():
     user = next((user for user in users if user.username == username), None)
 
     if user and check_password_hash(user.password, password):
-        return jsonify({'message': 'Login successful'}), 200
+        # Utiliser Flask-JWT-Extended pour créer un jeton d'accès
+        access_token = create_access_token(identity=user.id)
+        return jsonify({'message': 'Login successful', 'access_token': access_token}), 200
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
+
+@auth_bp.route('/protected', methods=['GET'])
+@jwt_required()  # Cette route nécessite un jeton valide
+def protected():
+    # Obtenir l'identité de l'utilisateur actuel
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
