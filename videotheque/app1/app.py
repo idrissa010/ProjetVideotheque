@@ -121,6 +121,10 @@ def details1():
 def details2():
     return render_template('details2.html')
 
+@app.route('/admin/index')
+def index_admin():
+    return render_template('/admin/index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
