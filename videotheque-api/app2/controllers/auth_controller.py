@@ -5,6 +5,7 @@ from app2.models.user import User
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+import json
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -16,6 +17,7 @@ def register():
         password = data.get('password')
         name = data.get('name')
         email = data.get('email')
+        #birth_date = data.get('birth_date')
         birth_date_str = data.get('birth_date')
 
         birth_date = datetime.strptime(birth_date_str, '%Y-%m-%d') if birth_date_str else None
@@ -41,6 +43,8 @@ def register():
     except Exception as e:
         return jsonify({'message': f'Error during registration: {str(e)}'}), 500
 
+
+
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -53,10 +57,16 @@ def login():
     if user and check_password_hash(user.password, password):
         # Utiliser Flask-JWT-Extended pour créer un jeton d'accès
         access_token = create_access_token(identity=user.id)
-        return jsonify({'message': 'Login successful', 'access_token': access_token}), 200
+        # Formater la date en "dd-mm-yyyy"
+        formatted_birth_date = user.birth_date.strftime('%d/%m/%Y') if user.birth_date else None
+        # Retourner les informations de l'utilisateur connecté sans le mot de passe
+        user_info = {key: getattr(user, key) for key in ['id', 'username', 'name', 'email', 'role']}
+        user_info['birth_date'] = formatted_birth_date
+        return jsonify({'message': 'Login successful', 'access_token': access_token, 'user': user_info}), 200
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
 
+    
 @auth_bp.route('/protected', methods=['GET'])
 @jwt_required()  # Cette route nécessite un jeton valide
 def protected():
