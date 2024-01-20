@@ -1,0 +1,92 @@
+<div class="sidebar">
+	<!-- sidebar logo -->
+	<a href="{{ url_for('index') }}" class="sidebar__logo">
+		<img src="{{ url_for('static', filename='admin/img/logo.svg') }}"alt="">
+	</a>
+	<!-- end sidebar logo -->
+	
+	<!-- sidebar user -->
+	<div class="sidebar__user">
+		<div class="sidebar__user-img">
+			<img src="{{ url_for('static', filename='admin/img/user.svg') }}" alt="">
+		</div>
+
+		<div class="sidebar__user-title">
+			<span>{{ user.role | capitalize }}</span>
+			<p>{{ user.username | capitalize }}</p>
+		</div>
+
+		<a href="{{ url_for('logout') }}" class="sidebar__user-btn">
+			<i class="icon ion-ios-log-out"></i>
+		</a>
+
+	</div>
+	<!-- end sidebar user -->
+
+	<!-- sidebar nav -->
+	<ul class="sidebar__nav">
+		<li class="sidebar__nav-item">
+			<a href="{{ url_for('index_admin') }}"  class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> Dashboard</a>
+		</li>
+		<li class="sidebar__nav-item">
+			<a href="{{ url_for('edit_user') }}"  class="sidebar__nav-link"><i class="icon ion-ios-person"></i>Edit Profile</a>
+		</li>
+		<li class="sidebar__nav-item">
+			<a href="{{ url_for('add_item') }}"  class="sidebar__nav-link"><i class="icon ion-ios-film"></i> Add Movie</a>
+		</li>
+
+		<!-- <li class="sidebar__nav-item">
+			<a href="catalog.html" class="sidebar__nav-link"><i class="icon ion-ios-film"></i> Catalog</a>
+		</li> -->
+
+		{% if user and user.role == 'admin' %}
+			<li class="sidebar__nav-item">
+				<a href="{{ url_for('admin_users') }}" class="sidebar__nav-link"><i class="icon ion-ios-contacts"></i> Users</a>
+			</li>
+		{% endif %}
+
+		<li hidden class="sidebar__nav-item">
+			<a href="comments.html" class="sidebar__nav-link"><i class="icon ion-ios-chatbubbles"></i> Comments</a>
+		</li>
+
+		<li hidden class="sidebar__nav-item">
+			<a href="reviews.html" class="sidebar__nav-link"><i class="icon ion-ios-star-half"></i> Reviews</a>
+		</li>
+		
+		<!-- dropdown -->
+		<li class="dropdown sidebar__nav-item" hidden>
+			<a class="dropdown-toggle sidebar__nav-link" href="#" role="button" id="dropdownMenuMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon ion-ios-copy"></i> Pages</a>
+
+			<ul class="dropdown-menu sidebar__dropdown-menu scrollbar-dropdown" aria-labelledby="dropdownMenuMore">
+				<li><a href="add-item.html">Add item</a></li>
+				<li><a href="{{ url_for('edit_user') }}">Edit user</a></li>
+				<li><a href="signin.html">Sign In</a></li>
+				<li><a href="signup.html">Sign Up</a></li>
+				<li><a href="forgot.html">Forgot password</a></li>
+				<li><a href="404.html">404 Page</a></li>
+			</ul>
+		</li>
+		<!-- end dropdown -->
+	</ul>
+	<!-- end sidebar nav -->
+	
+	<!-- sidebar copyright -->
+	<div class="sidebar__copyright">© 2019 FlixGo. <br>Create by <a href="https://themeforest.net/user/dmitryvolkov/portfolio" target="_blank">Dmitry Volkov</a></div>
+	<!-- end sidebar copyright -->
+</div>
+<!-- end sidebar -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtenir le chemin de la page actuelle (par exemple, "/admin/dashboard")
+        var currentPath = window.location.pathname;
+
+        // Sélectionner le lien correspondant à la page actuelle
+        var activeLink = document.querySelector('.sidebar__nav-link[href="' + currentPath + '"]');
+
+        // Si un lien correspondant est trouvé, ajouter la classe active
+        if (activeLink !== null) {
+            activeLink.classList.add('sidebar__nav-link--active');
+        }
+    });
+</script>

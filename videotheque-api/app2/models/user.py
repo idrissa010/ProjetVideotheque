@@ -12,7 +12,7 @@ class User:
         if birth_date is not None:
             if isinstance(birth_date, str):
                 # Convertir la chaîne de date en objet datetime
-                self.birth_date = datetime.strptime(birth_date, '%Y-%m-%d')
+                self.birth_date = datetime.strptime(birth_date, '%d-%m-%Y')
             elif isinstance(birth_date, datetime):
                 self.birth_date = birth_date
             else:
@@ -31,7 +31,7 @@ class User:
             'username': self.username,
             'password': self.password,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-            'birth_date': self.birth_date.strftime('%Y-%m-%d') if self.birth_date else None,
+            'birth_date': self.birth_date.strftime('%d-%m-%Y') if self.birth_date else None,
             'name': self.name,
             'email': self.email,
             'role': self.role,
