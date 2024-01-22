@@ -3,8 +3,8 @@ from datetime import datetime
 import uuid
 
 class User:
-    def __init__(self, username, password, name, email, birth_date=None, role='user'):
-        self.id = str(uuid.uuid4())  # Génère un UUID unique
+    def __init__(self, username, password, name, email, birth_date=None, role='user', id=None):
+        self.id = id #if id else str(uuid.uuid4())   # Génère un UUID unique
         self.username = username
         self.password = password
         self.created_at = datetime.now()

@@ -11,6 +11,7 @@ def load_users():
         users_data = []
     
     users = [User(
+        id=user_data['id'],
         username=user_data['username'],
         password=user_data['password'],
         birth_date=user_data['birth_date'],
