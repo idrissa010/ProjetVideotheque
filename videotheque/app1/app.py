@@ -121,6 +121,56 @@ def signup():
         return "Error making request to API", 500  # Réponse d'erreur interne du serveur
 
 
+@app.route('/add_movie', methods=['POST'])
+def add_movie():
+     # Récupérer les informations de l'utilisateur connecté à partir de la session
+    user_info = session.get('user_info', {})
+    owner_id = user_info.get('id')
+    
+    # Récupérer les données du formulaire
+    title = request.form.get('title')
+    description = request.form.get('description')
+    release_year = request.form.get('release_year')
+    duration = request.form.get('duration')
+    quality = request.form.get('quality')
+    age = request.form.get('age')
+    country = request.form.getlist('country')
+    genre = request.form.getlist('genre')
+    is_movie = request.form.get('is_movie')  # 'Movie' or 'TV Series'
+
+    # Construire les données à envoyer à votre API
+    data = {
+        'owner_id': owner_id,
+        'title': title,
+        'description': description,
+        'release_year': release_year,
+        'duration': duration,
+        'quality': quality,
+        'age': age,
+        'country': country,
+        'genre': genre,
+        'is_movie': is_movie,
+    }
+
+    # URL de votre API pour ajouter un film ou une série TV
+    api_url = 'http://10.11.5.97:8000/video/videos'
+
+    try:
+        # Envoyer la requête POST à l'API
+        response = requests.post(api_url, json=data)
+
+        # Traiter la réponse de l'API
+        if response.status_code == 201:
+            # Ajout réussi, rediriger vers la page souhaitée
+            return redirect(url_for('add_item'))
+        else:
+            # Échec de l'ajout, afficher un message d'erreur
+            return redirect(url_for('edit_user'))
+    except requests.RequestException as e:
+        print(f"Error making request to API: {e}")
+        return "Error making request to API", 500  # Réponse d'erreur interne du serveur
+  
+
 @app.route('/admin/edit-user', methods=['GET'])
 @login_required
 def edit_user():
