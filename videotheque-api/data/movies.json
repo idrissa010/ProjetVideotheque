@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "owner_id": 123,
+        "title": "I Dream in Another Language",
+        "main_actors": ["Actor1", "Actor2", "Actor3"],
+        "genre": ["Action", "Thriller"],
+        "cover": "images/covers/cover.jpg",
+        "playLink": "#",
+        "note": 8.4,
+        "features": [{"format": "HD", "ageRating": "16+"}],
+        "synopsis": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout...",
+        "release_year": "2017",
+        "duration": 120,
+        "format": "HD",
+        "age": "16+",
+        "country": ["Mexico"],
+        "genres": ["Action", "Thriller"],
+        "gallery": ["images/gallery/image1.jpg", "images/gallery/image2.jpg"],
+        "type": "Movie",
+        "video": "videos/movie1.mp4",
+        "is_public": true,
+        "comments": [
+            {"user_id": 456, "text": "Great movie!"},
+            {"user_id": 789, "text": "I enjoyed it."}
+        ]
+    },
+    {
+        "id": 2,
+        "owner_id": 456,
+        "title": "Benched",
+        "main_actors": ["Actor4", "Actor5", "Actor6"],
+        "genre": ["Comedy"],
+        "cover": "images/covers/cover2.jpg",
+        "playLink": "#",
+        "note": 7.1,
+        "features": [{"format": "HD", "ageRating": "16+"}],
+        "synopsis": "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
+        "release_year": "2018",
+        "duration": 95,
+        "format": "HD",
+        "age": "16+",
+        "country": ["United States"],
+        "genres": ["Comedy"],
+        "gallery": ["images/gallery/image3.jpg", "images/gallery/image4.jpg"],
+        "type": "Movie",
+        "video": "videos/movie2.mp4",
+        "is_public": true,
+        "comments": [
+            {"user_id": 101, "text": "Funny movie!"}
+        ]
+    }
+]

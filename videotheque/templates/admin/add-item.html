@@ -21,52 +21,53 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="#" class="form">
+					<form action="/add_movie" method="post" class="form">
 						<div class="row">
 							<div class="col-12 col-md-5 form__cover">
 								<div class="row">
 									<div class="col-12 col-sm-6 col-md-12">
 										<div class="form__img">
 											<label for="form__img-upload">Upload cover (270 x 400)</label>
-											<input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
+											<input id="form__img-upload" name="cover_image" type="file" accept=".png, .jpg, .jpeg">
 											<img id="form__img" src="#" alt=" ">
 										</div>
 									</div>
 								</div>
 							</div>
-
+					
 							<div class="col-12 col-md-7 form__content">
 								<div class="row">
 									<div class="col-12">
-										<input type="text" class="form__input" placeholder="Title">
+										<input type="text" class="form__input" placeholder="Title" name="title">
 									</div>
-
+					
 									<div class="col-12">
-										<textarea id="text" name="text" class="form__textarea" placeholder="Description"></textarea>
+										<textarea id="text" name="description" class="form__textarea" placeholder="Description"></textarea>
 									</div>
-
+					
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="Release year">
+										<input type="text" class="form__input" placeholder="Release year" name="release_year">
 									</div>
-
+					
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="Running timed in minutes">
+										<input type="text" class="form__input" placeholder="Running time in minutes" name="duration">
 									</div>
-
+					
 									<div class="col-12 col-sm-6 col-lg-3">
-										<select class="js-example-basic-single" id="quality">
+										<select class="js-example-basic-single" id="quality" name="quality">
 											<option></option>
 											<option value="FullHD">FullHD</option>
 											<option value="HD">HD</option>
 										</select>
 									</div>
-
+					
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="Age">
+										<input type="text" class="form__input" placeholder="Age" name="age">
 									</div>
-
+					
 									<div class="col-12 col-lg-6">
-										<select class="js-example-basic-multiple" id="country" multiple="multiple">
+										<select class="js-example-basic-multiple" id="country" name="country" multiple="multiple">
+											<!-- Options pour les pays -->
 											<option value="Afghanistan">Afghanistan</option>
 											<option value="Åland Islands">Åland Islands</option>
 											<option value="Albania">Albania</option>
@@ -290,9 +291,10 @@
 											<option value="Zimbabwe">Zimbabwe</option>
 										</select>
 									</div>
-
+					
 									<div class="col-12 col-lg-6">
-										<select class="js-example-basic-multiple" id="genre" multiple="multiple">
+										<select class="js-example-basic-multiple" id="genre" name="genre" multiple="multiple">
+											<!-- Options pour les genres -->
 											<option value="Action">Action</option>
 											<option value="Animation">Animation</option>
 											<option value="Comedy">Comedy</option>
@@ -308,7 +310,7 @@
 											<option value="Otheer">Otheer</option>
 										</select>
 									</div>
-
+					
 									<div class="col-12">
 										<div class="form__gallery">
 											<label id="gallery1" for="form__gallery-upload">Upload photos</label>
@@ -317,38 +319,38 @@
 									</div>
 								</div>
 							</div>
-
+					
 							<div class="col-12">
 								<ul class="form__radio">
 									<li>
 										<span>Item type:</span>
 									</li>
 									<li>
-										<input id="type1" type="radio" name="type" data-toggle="collapse" data-target=".multi-collapse" checked="">
+										<input id="type1" type="radio" name="is_movie" data-toggle="collapse" data-target=".multi-collapse" checked="">
 										<label for="type1">Movie</label>
 									</li>
 									<li>
-										<input id="type2" type="radio" name="type" data-toggle="collapse" data-target=".multi-collapse">
+										<input id="type2" type="radio" name="is_movie" data-toggle="collapse" data-target=".multi-collapse">
 										<label for="type2">TV Series</label>
 									</li>
 								</ul>
 							</div>
-							
+					
 							<div class="col-12">
 								<div class="row">
 									<!-- movie -->
-									<div class="col-12">
+									<div class="col-12" hidden>
 										<div class="collapse show multi-collapse" id="multiCollapseExample1">
 											<div class="form__video">
 												<label id="movie1" for="form__video-upload">Upload video</label>
-												<input data-name="#movie1" id="form__video-upload" name="movie" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
+												<input data-name="#movie1" id="form__video-upload" name="video" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
 											</div>
 										</div>
 									</div>
 									<!-- end movie -->
-
+					
 									<!-- tv series -->
-									<div class="col-12">
+									<div class="col-12" hidden>
 										<div class="collapse multi-collapse" id="multiCollapseExample2">
 											<!-- season -->
 											<div class="form__season">
@@ -357,21 +359,21 @@
 														<div class="col-12">
 															<span class="form__title">Season #1</span>
 														</div>
-
+					
 														<div class="col-12 col-sm-6 col-md-5 col-xl-6">
-															<input type="text" class="form__input" placeholder="Season title">
+															<input type="text" class="form__input" placeholder="Season title" name="season_title">
 														</div>
-
+					
 														<div class="col-12 col-sm-6 col-md-4 col-xl-4">
-															<input type="text" class="form__input" placeholder="Season info">
+															<input type="text" class="form__input" placeholder="Season info" name="season_info">
 														</div>
-
+					
 														<div class="col-12 col-sm-4 col-md-3 col-xl-2">
 															<button class="form__btn form__btn--add">add season</button>
 														</div>
 													</div>
 												</div>
-
+					
 												<!-- episode -->
 												<div class="form__episode">
 													<div class="row">
@@ -381,25 +383,25 @@
 																<i class="icon ion-ios-close"></i>
 															</button>
 														</div>
-
+					
 														<div class="col-12 col-md-6">
-															<input type="text" class="form__input" placeholder="Episode title 1">
+															<input type="text" class="form__input" placeholder="Episode title 1" name="episode_title_1">
 														</div>
-
+					
 														<div class="col-12 col-md-6">
-															<input type="text" class="form__input" placeholder="Air date">
+															<input type="text" class="form__input" placeholder="Air date" name="air_date_1">
 														</div>
-
+					
 														<div class="col-12">
 															<div class="form__video">
 																<label id="s1s1" for="form__video-upload1">Upload episode 1</label>
-																<input data-name="#s1s1" id="form__video-upload1" name="s1s1" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
+																<input data-name="#s1s1" id="form__video-upload1" name="episode_video_1" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
 															</div>
 														</div>
 													</div>
 												</div>
 												<!-- end episode -->
-
+					
 												<!-- episode -->
 												<div class="form__episode">
 													<div class="row">
@@ -409,22 +411,22 @@
 																<i class="icon ion-ios-close"></i>
 															</button>
 														</div>
-
+					
 														<div class="col-12 col-md-6">
-															<input type="text" class="form__input" placeholder="Episode title 2">
+															<input type="text" class="form__input" placeholder="Episode title 2" name="episode_title_2">
 														</div>
-
+					
 														<div class="col-12 col-md-6">
-															<input type="text" class="form__input" placeholder="Air date">
+															<input type="text" class="form__input" placeholder="Air date" name="air_date_2">
 														</div>
-
+					
 														<div class="col-12 col-sm-8 col-md-9 col-xl-10">
 															<div class="form__video">
 																<label id="s1s2" for="form__video-upload2">Upload episode 2</label>
-																<input data-name="#s1s2" id="form__video-upload2" name="s1s2" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
+																<input data-name="#s1s2" id="form__video-upload2" name="episode_video_2" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
 															</div>
 														</div>
-
+					
 														<div class="col-12 col-sm-4 col-md-3 col-xl-2">
 															<button class="form__btn form__btn--add">add episode</button>
 														</div>
@@ -436,14 +438,15 @@
 										</div>
 									</div>
 									<!-- end tv series -->
-
+					
 									<div class="col-12">
-										<button type="button" class="form__btn">publish</button>
+										<button type="submit" class="form__btn">publish</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</form>
+					
 				</div>
 				<!-- end form -->
 			</div>
