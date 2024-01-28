@@ -344,6 +344,27 @@ def movies():
     return render_template('/admin/movies.html', access_token=access_token, user=user_info, videos=videos)
 
 
+@app.route('/details/<movie_id>')
+@login_required
+def details_movie(movie_id):
+    # Récupérer l'access_token et les informations de l'utilisateur depuis la session
+    access_token = session.get('access_token')
+    user_info = session.get('user_info')
+    videos = session.get('videos')  # Récupérer les vidéos depuis la session
+
+    if not access_token or not user_info:
+        return redirect(url_for('signin'))   
+        
+    # Rechercher la vidéo avec movie_id dans les vidéos de la session
+    movie_info = next((video for video in videos if video['id'] == movie_id), None)
+
+    if movie_info:
+        return render_template('details.html', access_token=access_token, user=user_info, movie=movie_info)
+    else:
+        # flash('Failed to retrieve movie details', 'error')
+        return redirect(url_for('movies'))
+    
+
 
 @app.route('/dashboard/users', methods=['GET'])
 @login_required
@@ -352,6 +373,7 @@ def admin_users():
     access_token = session.get('access_token')
     user_info = session.get('user_info')
     return render_template('/admin/users.html', access_token=access_token, user=user_info)
+
 
 @app.route('/dashboard/add-item', methods=['GET'])
 @login_required
@@ -381,26 +403,32 @@ def index_admin():
 
 
 @app.route('/about')
+@login_required
 def about():
     return render_template('about.html')
 
 @app.route('/error_404')
+@login_required
 def error_404():
     return render_template('error_404.html')
 
 @app.route('/catalog1')
+@login_required
 def catalog1():
     return render_template('catalog1.html')
 
 @app.route('/catalog2')
+@login_required
 def catalog2():
     return render_template('catalog2.html')
 
 @app.route('/details1')
+@login_required
 def details1():
     return render_template('details1.html')
 
 @app.route('/details2')
+@login_required
 def details2():
     return render_template('details2.html')
 
