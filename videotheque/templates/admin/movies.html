@@ -1,0 +1,189 @@
+{% include 'admin/header_common.html' %}
+
+
+	{% include 'admin/header.html' %}
+
+
+	{% include 'admin/sidebar.html' %}
+
+
+	<!-- main content -->
+	<main class="main">
+		<div class="container-fluid">
+			<div class="row">
+				<!-- main title -->
+				<div class="col-12">
+					<div class="main__title">
+						<h2>Movies</h2>
+
+						<span class="main__title-stat">{{ videos|length }} Total</span>
+
+						<div class="main__title-wrap">
+							<!-- filter sort -->
+							<div class="filter" id="filter__sort">
+								<span class="filter__item-label">Sort by:</span>
+
+								<div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<input type="button" value="Date created">
+									<span></span>
+								</div>
+
+								<ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
+									<li>Release Date</li>
+									<li>Rating</li>
+									<li>Duration</li>
+								</ul>
+							</div>
+							<!-- end filter sort -->
+
+							<!-- search -->
+							<form action="#" class="main__title-form">
+								<input type="text" placeholder="Find movie / tv series..">
+								<button type="button">
+									<i class="icon ion-ios-search"></i>
+								</button>
+							</form>
+							<!-- end search -->
+						</div>
+					</div>
+				</div>
+				<!-- end main title -->
+
+				<!-- users -->
+				<div class="col-12">
+					<div class="main__table-wrap">
+						<table class="main__table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>TITLE</th>
+									<th>RATING</th>
+									<th>CATEGORY</th>
+									<th>DURATION</th>
+									<th hidden>STATUS</th>
+									<th>RELEASE DATE</th>
+									<th>ACTIONS</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								{% for video in videos %}
+								<tr>
+									<td>
+										<div class="main__table-text">{{ video.id }}</div>
+									</td>
+									<td>
+										<div class="main__table-text">{{ video.title }}</div>
+									</td>
+									<td>
+										<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> {{ video.rating }}</div>
+									</td>
+									<td>
+										<div class="main__table-text">{{ video.category }}</div>
+									</td>
+									<td>
+										<div class="main__table-text">{{ video.duration }}</div>
+									</td>
+									<td hidden>
+										<div class="main__table-text main__table-text--green">Visible</div>
+									</td>
+									<td>
+										<div class="main__table-text">{{ video.release_year }}</div>
+									</td>
+									<td>
+										<div class="main__table-btns">
+											<a hidden href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
+												<i class="icon ion-ios-lock"></i>
+											</a>
+											<a href="#" class="main__table-btn main__table-btn--view">
+												<i class="icon ion-ios-eye"></i>
+											</a>
+											<a href="{{ url_for('edit_movie', movie_id=video.id) }}" class="main__table-btn main__table-btn--edit">
+												<i class="icon ion-ios-create"></i> <!-- Icône "edit" -->
+											</a>
+											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal" data-movie-id="{{ video.id }}">
+												<i class="icon ion-ios-trash"></i>
+											</a>
+										</div>
+									</td>
+								</tr>
+								{% endfor %}								
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- end users -->
+
+				<!-- paginator -->
+				<div class="col-12" hidden>
+					<div class="paginator-wrap">
+						<span>10 from 14 452</span>
+
+						<ul class="paginator">
+							<li class="paginator__item paginator__item--prev">
+								<a href="#"><i class="icon ion-ios-arrow-back"></i></a>
+							</li>
+							<li class="paginator__item"><a href="#">1</a></li>
+							<li class="paginator__item paginator__item--active"><a href="#">2</a></li>
+							<li class="paginator__item"><a href="#">3</a></li>
+							<li class="paginator__item"><a href="#">4</a></li>
+							<li class="paginator__item paginator__item--next">
+								<a href="#"><i class="icon ion-ios-arrow-forward"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- end paginator -->
+			</div>
+		</div>
+	</main>
+	<!-- end main content -->
+
+	<!-- modal status -->
+	<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
+		<h6 class="modal__title">Status change</h6>
+
+		<p class="modal__text">Are you sure about immediately change status?</p>
+
+		<div class="modal__btns">
+			<button class="modal__btn modal__btn--apply" type="button">Apply</button>
+			<button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+		</div>
+	</div>
+	<!-- end modal status -->
+
+	<!-- modal delete -->
+	<form id="delete-form" action="" method="POST" style="display: none;">
+		<input type="hidden" name="_method" value="DELETE">
+	</form>
+	<!-- Boîte de dialogue de confirmation de suppression -->
+	<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+		<h6 class="modal__title">Item delete</h6>
+		<p class="modal__text">Are you sure to permanently delete this item?</p>
+		<div class="modal__btns">
+			<button class="modal__btn modal__btn--apply" type="submit" form="delete-form">Delete</button>
+			<button class="modal__btn modal__btn--dismiss" type="button" onclick="$.magnificPopup.close();">Dismiss</button>
+		</div>
+	</div>
+	<!-- end modal delete -->
+
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var deleteButtons = document.querySelectorAll('.main__table-btn--delete');
+			
+			deleteButtons.forEach(function(button) {
+				button.addEventListener('click', function(event) {
+					event.preventDefault();
+					var movieId = this.getAttribute('data-movie-id');
+					var deleteForm = document.querySelector('#delete-form');
+					deleteForm.action = '/delete_movie/' + movieId;
+				});
+			});
+		});
+	</script>
+		
+		
+
+{% include 'admin/footer_common.html' %}
