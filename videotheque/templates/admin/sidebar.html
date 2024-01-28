@@ -13,7 +13,7 @@
 
 		<div class="sidebar__user-title">
 			<span>{{ user.role | capitalize }}</span>
-			<p>{{ user.username | capitalize }}</p>
+			<p>{{ user.name | capitalize }}</p>
 		</div>
 
 		<a href="{{ url_for('logout') }}" class="sidebar__user-btn">

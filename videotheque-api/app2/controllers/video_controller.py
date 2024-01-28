@@ -8,7 +8,6 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 video_bp = Blueprint('video', __name__)
 
 @video_bp.route('/videos', methods=['GET'])
-@jwt_required()  
 def get_videos():
     VideoService.load_videos()
     videos = VideoService.get_videos()

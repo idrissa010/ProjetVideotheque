@@ -95,7 +95,7 @@
 											<a hidden href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
 												<i class="icon ion-ios-lock"></i>
 											</a>
-											<a href="#" class="main__table-btn main__table-btn--view">
+											<a href="{{ url_for('details_movie', movie_id=video.id) }}" class="main__table-btn main__table-btn--view">
 												<i class="icon ion-ios-eye"></i>
 											</a>
 											<a href="{{ url_for('edit_movie', movie_id=video.id) }}" class="main__table-btn main__table-btn--edit">

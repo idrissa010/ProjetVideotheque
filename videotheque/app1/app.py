@@ -31,10 +31,22 @@ def login_required(route_function):
 
 @app.route('/')
 def index():
-    # Récupérer l'access_token et les informations de l'utilisateur depuis la session
-    access_token = session.get('access_token')
-    user_info = session.get('user_info')
-    return render_template('index.html', access_token=access_token, user=user_info)
+    # Récupérer les vidéos de tous les utilisateurs via l'API en backend
+    api_url = f'http://10.11.5.97:8000/video/videos'
+    response = requests.get(api_url)
+    
+    if response.status_code == 200:
+        all_videos = response.json()     
+        # Stocker les vidéos dans la session Flask
+        session['all_videos'] = all_videos
+    else:
+        all_videos = []  # Gérer l'erreur si la récupération des vidéos échoue
+    
+    # Diviser les vidéos en fonction de leur catégorie
+    movie_videos = [video for video in all_videos if video['category'] == 'Movie']
+    tv_series_videos = [video for video in all_videos if video['category'] == 'TV Series']
+    
+    return render_template('index.html', all_videos=all_videos, movie_videos=movie_videos, tv_series_videos=tv_series_videos)
 
 
 # Route pour afficher le formulaire de connexion
@@ -71,7 +83,7 @@ def signin():
             session['user_info'] = response_data.get('user')
             
             # Rediriger vers la page souhaitée (index)
-            return redirect(url_for('index_admin'))
+            return redirect(url_for('add_item'))
         else:
             # Authentification échouée, afficher un message d'erreur
             return render_template('signin.html', error_message='Invalid credentials')
@@ -344,7 +356,42 @@ def movies():
     return render_template('/admin/movies.html', access_token=access_token, user=user_info, videos=videos)
 
 
+@app.route('/details/<movie_id>')
+@login_required
+def details_movie(movie_id):
+     # Récupérer l'access_token et les informations de l'utilisateur depuis la session
+    access_token = session.get('access_token')
+    user_info = session.get('user_info')
+    videos = session.get('videos')  # Récupérer les vidéos depuis la session
 
+    if not access_token or not user_info:
+        return redirect(url_for('signin'))   
+        
+    # Rechercher la vidéo avec movie_id dans les vidéos de la session
+    movie_info = next((video for video in videos if video['id'] == movie_id), None)
+
+    if movie_info:
+        return render_template('details.html', access_token=access_token, user=user_info, movie=movie_info)
+    else:
+        # flash('Failed to retrieve movie details', 'error')
+        return redirect(url_for('movies'))
+    
+
+@app.route('/details_unauthenticated/<movie_id>')
+def details_movie_unauthenticated(movie_id):
+    # Récupérer les vidéos depuis une source quelconque (par exemple une base de données ou un fichier JSON)
+    all_videos = session.get('all_videos')  # Récupérer les vidéos depuis la session
+
+    # Rechercher la vidéo avec movie_id dans les vidéos chargées
+    movie_info = next((video for video in all_videos if video['id'] == movie_id), None)
+
+    if movie_info:
+        return render_template('details.html', movie=movie_info)
+    else:
+        # flash('Movie not found', 'error')
+        return redirect(url_for('movies'))
+    
+    
 @app.route('/dashboard/users', methods=['GET'])
 @login_required
 def admin_users():
@@ -352,6 +399,7 @@ def admin_users():
     access_token = session.get('access_token')
     user_info = session.get('user_info')
     return render_template('/admin/users.html', access_token=access_token, user=user_info)
+
 
 @app.route('/dashboard/add-item', methods=['GET'])
 @login_required
@@ -381,26 +429,32 @@ def index_admin():
 
 
 @app.route('/about')
+@login_required
 def about():
     return render_template('about.html')
 
 @app.route('/error_404')
+@login_required
 def error_404():
     return render_template('error_404.html')
 
 @app.route('/catalog1')
+@login_required
 def catalog1():
     return render_template('catalog1.html')
 
 @app.route('/catalog2')
+@login_required
 def catalog2():
     return render_template('catalog2.html')
 
 @app.route('/details1')
+@login_required
 def details1():
     return render_template('details1.html')
 
 @app.route('/details2')
+@login_required
 def details2():
     return render_template('details2.html')
 
