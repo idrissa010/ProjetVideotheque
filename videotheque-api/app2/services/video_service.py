@@ -12,7 +12,6 @@ class VideoService:
             with open(JSON_VIDEO_DATABASE_PATH, 'r') as file:
                 content = file.read()
                 if not content:
-                    # Le fichier est vide, gérer en conséquence
                     print("Le fichier JSON est vide.")
                     cls.videos = []
                     return
@@ -24,7 +23,29 @@ class VideoService:
             print(f"Erreur de décodage JSON : {e}")
             videos_data = []
 
-        cls.videos = [Video(**video_data) for video_data in videos_data]
+        # Exclure la clé 'created_at' du dictionnaire video_data
+        filtered_videos_data = [{k: v for k, v in video_data.items() if k != 'created_at'} for video_data in videos_data]
+
+        # Instancier la classe Video avec les données filtrées
+        cls.videos = [Video(**video_data) for video_data in filtered_videos_data]
+    # def load_videos(cls):
+    #     try:
+    #         with open(JSON_VIDEO_DATABASE_PATH, 'r') as file:
+    #             content = file.read()
+    #             if not content:
+    #                 # Le fichier est vide, gérer en conséquence
+    #                 print("Le fichier JSON est vide.")
+    #                 cls.videos = []
+    #                 return
+    #             videos_data = json.loads(content)
+    #     except FileNotFoundError:
+    #         print(f"Fichier JSON introuvable à l'emplacement {JSON_VIDEO_DATABASE_PATH}.")
+    #         videos_data = []
+    #     except json.JSONDecodeError as e:
+    #         print(f"Erreur de décodage JSON : {e}")
+    #         videos_data = []
+
+    #     cls.videos = [Video(**video_data) for video_data in videos_data]
 
     @classmethod
     def save_videos(cls):

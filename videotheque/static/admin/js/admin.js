@@ -74,6 +74,10 @@ $(document).ready(function () {
 		placeholder: "Choose genre / genres"
 	});
 
+	$('#category').select2({
+		placeholder: "Choose category"
+	});
+
 	$('#subscription, #rights').select2();
 
 	/*==============================
