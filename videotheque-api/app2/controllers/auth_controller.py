@@ -134,6 +134,36 @@ def update_user(user_id):
     except Exception as e:
         return jsonify({'message': f'Error during user update: {str(e)}'}), 500
     
+@auth_bp.route('/update_password/<string:user_id>', methods=['PUT'])
+@jwt_required()
+def update_password(user_id):
+    try:
+        current_user_id = get_jwt_identity()
+        if str(current_user_id) != str(user_id):
+            return jsonify({'message': 'Unauthorized'}), 403
+
+        data = request.get_json()
+        new_password = data.get('new_password')
+
+        if not new_password:
+            return jsonify({'message': 'New password is missing'}), 400
+
+        users = load_users()
+        user = next((user for user in users if user.id == user_id))
+
+        if not user:
+            return jsonify({'message': 'User not found'}), 404
+
+        # Update the user's password with the new hashed password
+        user.password = generate_password_hash(new_password)
+
+        save_users(users)
+
+        return jsonify({'message': 'Password updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'message': f'Error during password update: {str(e)}'}), 500
+   
 @auth_bp.route('/list_users', methods=['GET'])
 @jwt_required()
 def list_users():
